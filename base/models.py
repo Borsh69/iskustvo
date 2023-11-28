@@ -7,7 +7,7 @@ from django.core.files.uploadedfile import InMemoryUploadedFile
 
 
 class Comment(models.Model):
-    author = models.ForeignKey("User",)
+    author = models.ForeignKey("User", on_delete=models.CASCADE)
     text = models.CharField(max_length=200)
     date = models.DateField(auto_now_add=True, blank=True)
 
@@ -26,10 +26,6 @@ class User(models.Model):
     avatar = models.ImageField(upload_to="images/",)
     tag = models.CharField(max_length=20, unique=True,)
     artworks = models.ManyToManyField(Artwork, blank=True, related_name="Работы",)
-
-
-
-
 
 
 
