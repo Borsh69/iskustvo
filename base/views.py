@@ -5,8 +5,9 @@ from .forms import *
 # Create your views here.
 def artwork(request, pk):
     artwork = Artwork.objects.get(id=pk)
-    
-    context = {'artwork': artwork}
+    coun = artwork.comments.count()
+    usr = artwork.users.all()
+    context = {'artwork': artwork, 'coun': coun, 'usr': usr}
     return render(request, 'artwork.html', context)
 
 def home(request):
