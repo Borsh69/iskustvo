@@ -4,24 +4,85 @@
 {% block content %}
 <main id="main">
 
-    <!-- ======= Breadcrumbs ======= -->
-    <div class="breadcrumbs d-flex align-items-center" style="background: linear-gradient(120deg, rgba(0,78,168,1) 0%, rgba(255,83,56,1) 100%);">
-      <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
-        <h2>Личный кабинет</h2>
-      </div>
-    </div><!-- End Breadcrumbs -->
 
-    <!-- ======= Contact Section ======= -->
-    <section id="contact" class="contact">
-      <div class="user_container">
-        <div class="user_info">
-          <div class="user_avatar">
-            <img src="{{user.avatar.url}}">
+    
+    <div class="page-heading">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 offset-lg-2 header-text">
+            <h2>Ваш личный кабинет</h2>
+            <p>Здесь вы можете посмотреть ваши альбомы, фотографии и видео.</p>
           </div>
-          <div class="user_name">{{user.name}}</div>
         </div>
       </div>
-    </section><!-- End Contact Section -->
+    </div>
+  
+    <div class="user-info">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="avatar">
+              <img src="" alt="">
 
+            </div>
+          </div>
+    </div>
+  
+    <section class="portfolio">
+      <div class="container">
+        <div class="row">
+          <div class="section-heading text-center">
+            <h6 style="font-size: 30pt; font-weight: bold;">Ваши альбомы</h6>
+  
+          </div>
+
+          <div class="card" style="width: 18rem; margin-left: 20px; margin-bottom: 20px;">
+              <img src="" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">{{i.name}}</h5>
+                <p class="card-text">{{i.description}}</p>
+                <a href="" class="btn btn-primary">Перейти в альбом</a>
+              </div>
+            </div>
+
+          <div class="card" style="width: 18rem; margin-left: 20px; margin-bottom: 20px;">
+            <div class="card-body">
+              <h5 class="card-title">Добавить новый альбом?</h5>
+              <p class="card-text">Разместите больше фото котиков :3</p>
+              <a id="modal_trigger" href="#modal" class="btn btn-primary">Создать</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+      <div style="margin-bottom: 20px;" class="container">
+        <div class="row">
+            <div class="col-lg-12">
+              <h4>Избранные фото и видео</h4>
+            </div>
+          </div>
+        </div>  
+      </div>
+  <section class="portfolio"><div class="user-info">
+  
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3">
+            <div class="thumb">
+              <img src="" alt="">
+              <div class="hover-effect">
+                <div class="content">
+                  <h4>Walk In the Beach</h4>
+                  <span>Ranked: <em>2nd</em></span>
+                  <span>Award Won: <em>None</em></span>
+                  <ul>
+                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                    <li><a href="#"><i class="fa fa-eye"></i></a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
   </main><!-- End #main -->
 {% endblock content %}
