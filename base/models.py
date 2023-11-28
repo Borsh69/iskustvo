@@ -31,10 +31,6 @@ class User(models.Model):
 
 
 
-
-
-
-
 @receiver(pre_save, sender=Artwork)
 def resize(sender,instance, **kwargs):
     if(instance.face):
