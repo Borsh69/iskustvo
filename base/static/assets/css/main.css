@@ -2558,7 +2558,7 @@ section {
 --------------------------------------------------------------*/
 .footer {
   color: #fff;
-  background: url("../img/footer-bg.jpg") top center no-repeat;
+  background: linear-gradient(120deg, rgba(0,78,168,1) 0%, rgba(255,83,56,1) 100%);
   background-size: cover;
   font-size: 14px;
   padding: 80px 0 60px 0;
@@ -2569,7 +2569,7 @@ section {
   content: "";
   background: rgba(0, 0, 0, 0.8);
   position: absolute;
-  inset: 0;
+
 }
 
 .footer .footer-content .footer-info {

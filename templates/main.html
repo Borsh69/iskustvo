@@ -45,6 +45,7 @@
                 <ul>
                   <li><a href="{% url 'art_works' %}">Работы</a></li>
                   <li><a href="{% url 'contact' %}">Местоположение</a></li>
+                  <li><a href="{% url 'account' %}">Аккаунт</a></li>
                 </ul>
               </nav><!-- .navbar -->
         
@@ -54,7 +55,7 @@
 		{% block content %}
 		
 		{% endblock content %}
-		{% include 'footer.html' %}
+
 	</div>
     {% block script %}<script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
