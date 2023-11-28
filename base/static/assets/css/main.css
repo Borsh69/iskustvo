@@ -61,7 +61,7 @@ h6 {
 # Sections & Section Header
 --------------------------------------------------------------*/
 section {
-  padding: 80px 0;
+  padding: 0px;
   overflow: hidden;
 }
 
@@ -112,7 +112,7 @@ section {
 # Breadcrumbs
 --------------------------------------------------------------*/
 .breadcrumbs {
-  padding: 140px 0 60px 0;
+  padding: 10px 0 10px 0;
   min-height: 10vh;
   position: relative;
   background-size: cover;
@@ -2672,3 +2672,23 @@ section {
 .registration-cssave__form{
   padding-top: 200px;
 }
+
+.user_container {
+  margin: 2% 10%;
+}
+
+.user_info {
+  display: grid;
+  grid-template-areas: 
+  "A A B B  B"
+  "A A C C  C";
+}
+
+.user_avatar {
+  grid-area: A;
+}
+
+.user_name {
+  grid-area: B;
+}
+
