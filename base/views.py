@@ -3,6 +3,8 @@ from .models import *
 from .forms import *
 
 # Create your views here.
+def artwork(request):
+    return render(request, 'artwork.html')
 def home(request):
     return render(request, 'home.html')
 
