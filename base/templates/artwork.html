@@ -11,12 +11,6 @@
     <div class="breadcrumbs d-flex align-items-center" style="background: linear-gradient(120deg, rgba(0,78,168,1) 0%, rgba(255,83,56,1) 100%);">
       <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
 
-        <h2>Blog Details</h2>
-        <ol>
-          <li><a href="{% url 'home' %}">Home</a></li>
-          <li>Blog Details</li>
-        </ol>
-
       </div>
     </div><!-- End Breadcrumbs -->
 
@@ -24,7 +18,7 @@
     <section id="blog" class="blog">
       <div class="container" data-aos="fade-up" data-aos-delay="100">
 
-        <div class="row g-5">
+        <div class="row g-5 artwork_main">
 
           <div class="col-lg-8">
 
@@ -45,18 +39,17 @@
               </div><!-- End post content -->
 
 
-
             </article>
             <!-- End blog post -->
             {% for i in usr %}
-            <div class="post-author d-flex align-items-center">
+            <div class="blog-details post-author d-flex align-items-center">
               <img src="{{i.avatar.url}}" class="rounded-circle flex-shrink-0" alt="">
               <div>
                 <h4>{{i.name}}</h4>
               </div>
             </div><!-- End post author -->
             {% endfor %}
-            <div class="comments">
+            <div class="comments blog-details">
 
               <h4 class="comments-count">{{coun}} Comments</h4>
               {% for i in artwork.comments.all %}

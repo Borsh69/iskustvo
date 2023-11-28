@@ -28,10 +28,10 @@ def login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
-            print("HERE!1")
+            
             cd = form.cleaned_data
             try:
-                usr_account = User.objects.get(login=cd["login"])
+                usr_account = User.objects.get(login=cd["login"])   
             except User.DoesNotExist:
                 print("Error Account")
             if(usr_account.password == cd["password"]):
