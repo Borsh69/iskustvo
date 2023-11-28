@@ -3,8 +3,12 @@ from .models import *
 from .forms import *
 
 # Create your views here.
-def artwork(request):
-    return render(request, 'artwork.html')
+def artwork(request, pk):
+    artwork = Artwork.objects.get(id=pk)
+    
+    context = {'artwork': artwork}
+    return render(request, 'artwork.html', context)
+
 def home(request):
     return render(request, 'home.html')
 
