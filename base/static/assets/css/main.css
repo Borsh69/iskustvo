@@ -2106,9 +2106,12 @@ section {
   padding: 30px;
 }
 
-.blog .blog-details .post-img {
+.blog .blog-details {
   margin: -30px -30px 20px -30px;
   overflow: hidden;
+}
+.post-img {
+  margin-top: 20px;
 }
 
 .blog .blog-details .title {
@@ -2692,3 +2695,10 @@ section {
   grid-area: B;
 }
 
+.artwork_main {
+  justify-content: center;
+}
+
+.post-img {
+  justify-content: center;
+}
