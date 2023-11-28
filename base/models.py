@@ -30,7 +30,7 @@ class User(models.Model):
     tag = models.CharField(max_length=20, unique=True,)
     login = models.CharField(max_length=20, unique=True,)
     password = models.CharField(max_length=20)
-    artworks = models.ManyToManyField(Artwork, blank=True, related_name="Работы",)
+    artworks = models.ManyToManyField(Artwork, blank=True, related_name="users",)
 
     def __str__(self):
         return self.name

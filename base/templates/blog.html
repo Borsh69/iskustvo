@@ -26,8 +26,7 @@
 
           <div class="col-xl-4 col-md-6">
             {% for artwork in artworks %}
-            <div class="post-item position-relative h-100">
-
+            <div class="post-item position-relative h-100" onclick="location.href='{% url 'artwork' artwork.id %}';" style="cursor: pointer;">
               <div class="post-img position-relative overflow-hidden">
                 <img src="{{artwork.face.url}}" class="img-fluid" alt="">
               </div>
@@ -36,23 +35,21 @@
 
                 <h3 class="post-title">{{artwork.name}}</h3>
 
+                {% if artwork.users.all %}
                 <div class="meta d-flex align-items-center">
+                  {% for user in artwork.users.all %}
                   <div class="d-flex align-items-center">
-                    <i class="bi bi-person"></i> <span class="ps-2">John Doe</span>
+                    <i class="bi bi-person"></i> <span class="ps-2">{{user.name}}</span>
                   </div>
-                  <span class="px-3 text-black-50">/</span>
-                  <div class="d-flex align-items-center">
-                    <i class="bi bi-folder2"></i> <span class="ps-2">Politics</span>
-                  </div>
+                  {% endfor %}
                 </div>
-
+                {% endif %}
                 <p>
-                  Similique neque nam consequuntur ad non maxime aliquam quas. Quibusdam animi praesentium. Aliquam et laboriosam eius aut nostrum quidem aliquid dicta.
+                  {{artwork.description}}
                 </p>
 
                 <hr>
 
-                <a href="{% url 'artwork' artwork.id %}" class="readmore stretched-link"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
 
               </div>
 
