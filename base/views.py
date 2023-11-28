@@ -9,6 +9,9 @@ def home(request):
 def art_works(request):
     return render(request, 'blog.html')
 
+def contact(request):
+    return render(request, 'contact.html')
+
 def login(request):
 
     if request.method == 'POST':
