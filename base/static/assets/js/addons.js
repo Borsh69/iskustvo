@@ -24,7 +24,7 @@ function sendComment(index) {
             xhr.setRequestHeader('X-CSRFToken', csrftoken);
         },
         success: function(data) {
-            console.log(data);
+            
         }
     });
 }
