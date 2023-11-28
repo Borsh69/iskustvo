@@ -1,4 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from .models import *
+from .forms import *
 
 # Create your views here.
 def home(request):
@@ -7,8 +9,34 @@ def home(request):
 def art_works(request):
     return render(request, 'blog.html')
 
-def contact(request):
-    return render(request, 'contact.html')
+def login(request):
+
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            print("HERE!1")
+            cd = form.cleaned_data
+            try:
+                usr_account = User.objects.get(login=cd["login"])
+            except User.DoesNotExist:
+                print("Error Account")
+            if(usr_account.password == cd["password"]):
+                id_usr = int(usr_account.id)
+                request.session.set_expiry(24*3600)
+                request.session['id'] = id_usr
+                return redirect("/account/")
+            else:
+                print("wrong password")
+    else:
+        form = LoginForm()
+    return render(request, 'login.html', {'form': form})
 
 def account(request):
-    return render(request, 'account.html')
+    if "id" in request.session:
+        user_id = int(request.session['id'])
+        user = User.objects.get(id=user_id)
+        form = {"user":user}
+        return render(request, 'account.html', context=form)
+    else:
+        return redirect("/login/")
+    
