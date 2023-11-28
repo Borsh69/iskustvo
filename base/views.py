@@ -9,7 +9,10 @@ def home(request):
     return render(request, 'home.html')
 
 def art_works(request):
-    return render(request, 'blog.html')
+    art_works = Artwork.objects.all()
+
+    context = {'artworks': art_works}
+    return render(request, 'blog.html', context=context)
 
 def contact(request):
     return render(request, 'contact.html')

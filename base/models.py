@@ -16,9 +16,12 @@ class Artwork(models.Model):
     name = models.CharField(max_length=40,)
     description = models.TextField(max_length=500,)
     uncompressed_img = models.ImageField(upload_to="images/", verbose_name="Оригинальное изображение", blank=True,)
-    object3d = models.FileField(upload_to="files/", verbose_name="3D файл",)
-    comments = models.ManyToManyField(Comment, blank=True, null=True)
-
+    object3d = models.FileField(upload_to="files/", verbose_name="3D файл", blank=True,)
+    comments = models.ManyToManyField(Comment, blank=True)
+    date = models.DateField(auto_now_add=True, blank=True)
+    def __str__(self):
+        return self.name
+    
 
 
 class User(models.Model):
