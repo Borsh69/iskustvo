@@ -50,7 +50,7 @@ def account(request):
         coun = user.artworks.count()
         form = {"user":user, 'coun': coun}
         response = render(request, 'account.html', context=form)
-        response.set_cookie('In_Account', 'True ')
+        response.set_cookie('In_Account', 'True')
         return response
     else:
         return redirect("/login/")
@@ -68,6 +68,9 @@ def post_comment(request):
             artwork = Artwork.objects.get(id=index)
             artwork.comments.add(tmp)
             print("success!")
-            return HttpResponse("<h1>NICE!</h1>")
+            coun = artwork.comments.count()
+            usr = artwork.users.all()
+            context = {'artwork': artwork, 'coun': coun, 'usr': usr}
+            return render(request, "artwork_comments.html", context=context)
     else:
         return redirect("/login/")

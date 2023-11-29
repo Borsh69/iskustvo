@@ -35,7 +35,9 @@
                 <p>
                   {{artwork.description}}  
                 </p>
-
+                {% if artwork.uncompressed_img %}
+                <a download href="{{artwork.uncompressed_img.url}}">Оригинальное изображение</a>
+                {% endif %}
               </div><!-- End post content -->
 
 
@@ -50,23 +52,9 @@
             </div><!-- End post author -->
             {% endfor %}
             <div class="comments blog-details">
-
-              <h4 class="comments-count">{{coun}} Comments</h4>
-              {% for i in artwork.comments.all %}
-              <div id="comment-1" class="comment">
-                <div class="d-flex">
-                  <div class="comment-img"><img src="{{i.author.avatar.url}}" alt=""></div>
-                  <div>
-                    
-                    <time datetime="2020-01-01">{{i.date}}</time>
-                    <p>
-                    {{i.text}}
-                    </p>
-                  </div>
-                </div>
+              <div id="commentSection">
+              {% include "artwork_comments.html" %}
               </div>
-              {% endfor %}
-
 
               <div class="reply-form">
                 {% csrf_token %}
