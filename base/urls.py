@@ -13,7 +13,9 @@ urlpatterns = [
     path('regist/', views.regist, name="regist"),
     path('addartwork/', views.addartwork, name="addartwork"),
     path('exhibition/', views.exhibition, name="exhibition"),
-    path("liked/", views.liked, name="liked"),
-    path("unliked/", views.unliked, name="unliked"),
+    path("liked_exhibition/", views.liked_exhibition, name="liked_exhibition"),
+    path("unliked_exhibition/", views.unliked_exhibition, name="unliked_exhibition"),
+    path("liked_artwork/", views.liked_artwork, name="liked_artwork"),
+    path("unliked_artwork/", views.unliked_artwork, name="unliked_artwork"),
 
 ]

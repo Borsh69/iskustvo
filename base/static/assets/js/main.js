@@ -212,8 +212,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 document.addEventListener('DOMContentLoaded', function() {
-    
-  console.log(data);
   var calendarEl = document.getElementById('calendar');
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, '0');
@@ -248,7 +246,7 @@ function getCSRFToken() {
   return null;
 }
   
-function MyClick(index) {
+function MyClickExhibition(index) {
   console.log(index);
 
   const catid = index;
@@ -264,7 +262,7 @@ function MyClick(index) {
 
     $.ajax({
             type: "POST",
-            url: "/liked/",
+            url: "/liked_exhibition/",
             data: {
                 'liked_id': index
             },
@@ -281,7 +279,55 @@ function MyClick(index) {
 
     $.ajax({
             type: "POST",
-            url: "/unliked/",
+            url: "/unliked_exhibition/",
+            data: {
+                'liked_id': index
+            },
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader('X-CSRFToken', csrftoken);
+            },
+            success: function(data) {
+                console.log(data);
+            }
+    });
+  }
+}
+
+
+function MyClickArtwork(index) {
+  console.log(index);
+
+  const catid = index;
+  const csrftoken = getCSRFToken();
+  
+  let block = document.getElementById("like_button" + index);
+  
+  console.log(block);
+
+   if (block.classList.contains("main-block__button")) {
+    block.classList.add("main-block__button__liked");
+    block.classList.remove("main-block__button");
+
+    $.ajax({
+            type: "POST",
+            url: "/liked_artwork/",
+            data: {
+                'liked_id': index
+            },
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader('X-CSRFToken', csrftoken);
+            },
+            success: function(data) {
+                console.log(data);
+            }
+    });
+  } else {
+    block.classList.add("main-block__button");
+    block.classList.remove("main-block__button__liked");
+
+    $.ajax({
+            type: "POST",
+            url: "/unliked_artwork/",
             data: {
                 'liked_id': index
             },

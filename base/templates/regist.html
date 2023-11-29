@@ -18,15 +18,15 @@
                 <div class = "">{{form.name.errors}}</div>
                 <div class = ""><p><label class = "form-label" for="{{ form.tag.id_for_label}}">Тэг:  </label>{{form.tag}}</p></div>
                 <div class = "">{{form.tag.errors}}</div>
-                <label class = "form-label" for="{{ form.avatar.id_for_label}}">Аватар:  </label>
-                    {{form.avatar}}</p>
                 
+                <div class = ""><p><label class = "form-label" for="{{ form.avatar.id_for_label}}">Аватар:  </label>{{form.avatar}}</p></div>
                 <div class = "">{{form.avatar.errors}}</div>
+
                 <div class = ""><p><label class = "form-label" for="{{ form.login.id_for_label}}">Логин:  </label>{{form.login}}</p></div>
                 <div class = "">{{form.login.errors}}</div>
                 <div class = ""><p><label class = "form-label" for="{{ form.password.id_for_label}}">Логин:  </label>{{form.password}}</p></div>
                 <div class = "">{{form.password.errors}}</div>
-                <a class = "form-label-a" href="{% url 'regist' %}">Зарегестрироваться?</a>
+                <a class = "form-label-a register-link" href="{% url 'login' %}">Войти в существующий аккаунт?</a>
                 <div class = "">
                     <button class="login_button">Регестрация</button>
                 </div>

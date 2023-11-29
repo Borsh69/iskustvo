@@ -45,10 +45,12 @@
                   {{artwork.description}}
                 </p>
 
-                <hr>
-
-
               </div>
+              {% if user %}
+                <div id="like_button{{artwork.id}}" {% if artwork in user.liked.all %} class="main-block__button__liked" {% else %} class="main-block__button" {% endif %} data-catid="{{artwork.id}}" onclick="event.cancelBubble=true;MyClickArtwork({{artwork.id}});"></div>
+              {% endif %}
+
+              
 
             </div>
           </div><!-- End post list item -->

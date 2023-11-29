@@ -41,6 +41,7 @@ class User(models.Model):
     login = models.CharField(max_length=20, unique=True,)
     password = models.CharField(max_length=20)
     artworks = models.ManyToManyField(Artwork, blank=True, related_name="users")
+    liked = models.ManyToManyField(Artwork, blank=True, related_name="followers")
     def __str__(self):
         return self.name
     
@@ -70,3 +71,33 @@ def resize(sender,instance, **kwargs):
         thumb_io = BytesIO()
         face.save(thumb_io, format='PNG')
         instance.face.save(instance.face.name, InMemoryUploadedFile(thumb_io, None, f'{instance.face.name}', 'face', thumb_io.tell(), None), save=False)
+
+@receiver(pre_save, sender=Exhibition)
+def resize(sender,instance, **kwargs):
+    if(instance.face):
+        face = PILImage.open(instance.face)
+        width,height = face.size
+        new_width,new_height = 800, 600
+        left = (width-new_width)/2
+        right = (width+new_width)/2
+        top = (height-new_height)/2
+        bottom = (height+new_height)/2
+        face = face.crop((left,top,right,bottom))
+        thumb_io = BytesIO()
+        face.save(thumb_io, format='PNG')
+        instance.face.save(instance.face.name, InMemoryUploadedFile(thumb_io, None, f'{instance.face.name}', 'face', thumb_io.tell(), None), save=False)
+
+@receiver(pre_save, sender=User)
+def resize(sender,instance, **kwargs):
+    if(instance.avatar):
+        avatar = PILImage.open(instance.avatar)
+        width,height = avatar.size
+        new_width,new_height = 400, 400
+        left = (width-new_width)/2
+        right = (width+new_width)/2
+        top = (height-new_height)/2
+        bottom = (height+new_height)/2
+        avatar = avatar.crop((left,top,right,bottom))
+        thumb_io = BytesIO()
+        avatar.save(thumb_io, format='PNG')
+        instance.avatar.save(instance.avatar.name, InMemoryUploadedFile(thumb_io, None, f'{instance.avatar.name}', 'avatar', thumb_io.tell(), None), save=False)

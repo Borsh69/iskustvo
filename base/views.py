@@ -4,15 +4,19 @@ from .forms import *
 from json import dumps
 # Create your views here.
 def exhibition(request):
+    user = None
+    if "id" in request.session:
+        user_id = int(request.session['id'])
+        user = User.objects.get(id=user_id)
     exe = Exhibition.objects.all()
     data=[]
     for i in exe:
         temp = {'title':i.title, 'start':str(i.date_start)[0:10], 'end':str(i.date_end)[0:10]}
         data.append(temp)
     dataJSON = dumps(data)
-
+    print
     print(dataJSON)
-    return render(request, 'exhibition.html', {'data':dataJSON, 'exe':exe})
+    return render(request, 'exhibition.html', {'data':dataJSON, 'exe':exe, 'user':user})
 
 
 def addartwork(request):
@@ -57,6 +61,7 @@ def addartwork(request):
 
 
 def regist(request):
+    user = None
     if "id" in request.session:
         return redirect('/account/')
     if request.method == 'POST':
@@ -73,31 +78,45 @@ def regist(request):
             print("Error")
     else:
         form = RegistForm()
-    return render(request, 'regist.html', {'form': form})
+    return render(request, 'regist.html', {'form': form, 'user':user})
 
 
 
 def artwork(request, pk):
+    user = None
+    if "id" in request.session:
+        user_id = int(request.session['id'])
+        user = User.objects.get(id=user_id)
     artwork = Artwork.objects.get(id=pk)
     coun = artwork.comments.count()
     usr = artwork.users.all()
-    context = {'artwork': artwork, 'coun': coun, 'usr': usr}
+    context = {'artwork': artwork, 'coun': coun, 'usr': usr, 'user': user}
     return render(request, 'artwork.html', context)
 
 def home(request):
     return render(request, 'home.html')
 
 def art_works(request):
+    user = None
+    if "id" in request.session:
+        user_id = int(request.session['id'])
+        user = User.objects.get(id=user_id)
     art_works = Artwork.objects.all()
-    context = {'artworks': art_works}
+    context = {'artworks': art_works, 'user': user}
     return render(request, 'blog.html', context=context)
 
 def maps(request):
+    user = None
+    if "id" in request.session:
+        user_id = int(request.session['id'])
+        user = User.objects.get(id=user_id)
     art_works = Artwork.objects.all()
-    context = {'artworks': art_works}
+    context = {'artworks': art_works, 'user': user}
     return render(request, 'maps.html', context=context)
 
 def login(request):
+    user= None
+    usr_account = None
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
@@ -107,16 +126,22 @@ def login(request):
                 usr_account = User.objects.get(login=cd["login"])   
             except User.DoesNotExist:
                 print("Error Account")
-            if(usr_account.password == cd["password"]):
-                id_usr = int(usr_account.id)
-                request.session.set_expiry(24*3600)
-                request.session['id'] = id_usr
-                return redirect("/account/")
+            if (usr_account):
+                if(usr_account.password == cd["password"]):
+                    id_usr = int(usr_account.id)
+                    request.session.set_expiry(24*3600)
+                    request.session['id'] = id_usr
+                    return redirect("/account/")
+                else:
+                    print("wrong password")
+                    form.add_error("password", "Пароль неправильный!")
             else:
-                print("wrong password")
+                print("Error Account")
+                form.add_error("login", "Такого аккаунта не существует!")
+
     else:
         form = LoginForm()
-    return render(request, 'login.html', {'form': form})
+    return render(request, 'login.html', {'form': form, 'user': user})
 
 def account(request):
     if "id" in request.session:
@@ -127,7 +152,7 @@ def account(request):
         data=[]
         for i in exe:
             temp = {'title':i.title, 'start':str(i.date_start)[0:10], 'end':str(i.date_end)[0:10]}
-        data.append(temp)
+            data.append(temp)
         dataJSON = dumps(data)
 
 
@@ -140,6 +165,7 @@ def account(request):
     
 
 def post_comment(request):
+    user = None
     if "id" in request.session:
         user_id = int(request.session['id'])
         user = User.objects.get(id=user_id)
@@ -153,29 +179,55 @@ def post_comment(request):
             print("success!")
             coun = artwork.comments.count()
             usr = artwork.users.all()
-            context = {'artwork': artwork, 'coun': coun, 'usr': usr}
+            context = {'artwork': artwork, 'coun': coun, 'usr': usr, 'user':user}
             return render(request, "artwork_comments.html", context=context)
     else:
         return redirect("/login/")
     
-def liked(request):
+def liked_exhibition(request):
     if 'id' in request.session:
         id_per = request.session['id']
         account = User.objects.get(id=id_per)
-    else: return redirect("/login/")
+    else: 
+        return redirect("/login/")
     if request.method == 'POST':
         liked_id = request.POST.get('liked_id', None)
         account.favorite.add(Exhibition.objects.get(id=liked_id))
-        account.save()
         return HttpResponse("<h1>Nice!</h1>")
 
-def unliked(request):
+def unliked_exhibition(request):
     if 'id' in request.session:
         id_per = request.session['id']
         account = User.objects.get(id=id_per)
-    else: return redirect("/login/")
+    else: 
+        return redirect("/login/")
     if request.method == 'POST':
         liked_id = request.POST.get('liked_id', None)
         account.favorite.remove(Exhibition.objects.get(id=liked_id))
-        account.save()
         return HttpResponse("<h1>Nice!</h1>")
+
+
+def liked_artwork(request):
+    if 'id' in request.session:
+        id_per = request.session['id']
+        account = User.objects.get(id=id_per)
+    else: 
+        return redirect("/login/")
+    if request.method == 'POST':
+        liked_id = request.POST.get('liked_id', None)
+        account.liked.add(Artwork.objects.get(id=liked_id))
+        return HttpResponse("<h1>Nice!</h1>")
+
+def unliked_artwork(request):
+    if 'id' in request.session:
+        id_per = request.session['id']
+        account = User.objects.get(id=id_per)
+    else: 
+        return redirect("/login/")
+    if request.method == 'POST':
+        liked_id = request.POST.get('liked_id', None)
+        account.liked.remove(Artwork.objects.get(id=liked_id))
+        return HttpResponse("<h1>Nice!</h1>")
+
+
+

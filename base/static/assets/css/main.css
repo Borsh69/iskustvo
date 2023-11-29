@@ -20,7 +20,7 @@
 /* Colors */
 :root {
   --color-default: #364d59;
-  --color-primary: #feb900;
+  --color-primary: #2e3f79;
   --color-secondary: #52565e;
 }
 
@@ -44,7 +44,7 @@ a {
 }
 
 a:hover {
-  color: #ffc732;
+  color: #f05144;
   text-decoration: none;
 }
 
@@ -115,6 +115,25 @@ section {
   font-size: calc(var(--index) * .6);
   font-weight: 600;
 }
+.main-block__button {
+	z-index: 8;
+  flex: 0 0 17%;
+  display: block;
+	position: absolute;
+  text-align: left;
+  width: 50px;	
+  height: 50px;
+  background-image: url(../img/heart-outlined.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  right: 0;
+	bottom: 1%;
+	border-radius: 10px;
+  transition: .2s;
+}
+.main-block__button:hover {
+  background-image: url(../img/heart-filled.png);
+}
 .main-block__button__liked {
   z-index: 8;
   flex: 0 0 17%;
@@ -127,8 +146,8 @@ section {
   background-repeat: no-repeat;
   background-size: contain;
   right: 0;
-bottom: 0;
-border-radius: 10px;
+  bottom: 1%;
+  border-radius: 10px;
   transition: .2s;
 }
 .main-block__button__liked:hover {
@@ -2166,7 +2185,7 @@ border-radius: 10px;
 }
 
 .blog .posts-list .post-content {
-  padding: 30px;
+  padding: 30px 30px 0px 30px;
 }
 
 .blog .posts-list .post-title {
@@ -2829,4 +2848,33 @@ border-radius: 10px;
 
 .main_map {
   width: 100%;
+}
+
+.account-work {
+  width: 50%;
+}
+
+.center-account-page {
+  width:70%
+}
+
+@media (max-width: 768px) {
+  .center-account-page {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .account-work {
+    width: 100%;
+  }
+}
+
+.register-link {
+  color:#FFFFFF
+}
+
+.form-control {
+  color: #FFFFFF;
 }

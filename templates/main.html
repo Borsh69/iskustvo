@@ -45,9 +45,15 @@
                 <ul>
                   <li><a href="{% url 'art_works' %}">Работы</a></li>
                   <li><a href="{% url 'maps' %}">Карты</a></li>
+                  {% if user %}
                   <li><a href="{% url 'addartwork' %}">Добавление работы</a></li>
+                  {% endif %}
                   <li><a href="{% url 'exhibition' %}">Выставки</a></li>
+                  {% if user %}
                   <li><a href="{% url 'account' %}">Личный кабинет</a></li>
+                  {% else %}
+                  <li><a href="{% url 'login' %}">Вход</a></li>
+                  {% endif %}
                 </ul>
               </nav><!-- .navbar -->
         

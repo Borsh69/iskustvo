@@ -19,34 +19,33 @@
         <div class="container" data-aos="fade-up" data-aos-delay="100">
 
             <div class="row gy-4 posts-list">
-              {% for i in exe %}
+              {% for exhibition in exe %}
               <div class="col-xl-4 col-md-6">
                 
-                <div class="post-item position-relative h-100" style="cursor: pointer;">
+                <div class="post-item position-relative" style="">
                   <div class="post-img position-relative overflow-hidden">
-                    <img src="{{i.face.url}}" class="img-fluid" alt="">
+                    <img src="{{exhibition.face.url}}" class="img-fluid" alt="">
                   </div>
     
                   <div class="post-content d-flex flex-column">
     
-                    <h3 class="post-title">{{i.title}}</h3>
+                    <h3 class="post-title">{{exhibition.title}}</h3>
     
                     <div class="meta d-flex align-items-center">  
                       <div class="d-flex align-items-center">
-                         <span class="ps-2">Начало: {{i.date_start}}</span>
-                         <span class="ps-2">Конец: {{i.date_end}}</span>
+                         <span class="ps-2">Начало: {{exhibition.date_start}} <br>Конец: {{exhibition.date_end}}</span>
                       </div>
                     </div>
                     <p>
-                      {{i.description}}
+                      {{exhibition.description}}
                     </p>
-                    <div id="like_button{{i.id}}" {% if competition in i.favorite.all %} class="main-block__button__liked" {% else %} class="main-block__button" {% endif %} data-catid="{{competition.id}}" onclick="event.cancelBubble=true;MyClick({{i.id}});"></div>
-                    <hr>
-    
-    
+                    {% if user %}
+                    <div id="like_button{{exhibition.id}}" {% if exhibition in user.favorite.all %} class="main-block__button__liked" {% else %} class="main-block__button" {% endif %} data-catid="{{exhibition.id}}" onclick="event.cancelBubble=true;MyClickExhibition({{exhibition.id}});"></div>
+                    {% endif %}
                   </div>
-    
+                  <button style="margin: 10px;" onclick="alert('Функция в разработке :З');" class="btn btn-primary">Принять участие</button>
                 </div>
+                
               </div><!-- End post list item -->
               {% endfor %}
     
