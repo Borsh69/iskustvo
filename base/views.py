@@ -5,10 +5,12 @@ from .forms import *
 # Create your views here.
 def addartwork(request):
     if "id" in request.session:
-        return redirect('/account/')
+        user_id = int(request.session['id'])
+        user = User.objects.get(id=user_id)
+    else:
+        return redirect('/login/')
     if request.method == 'POST':
         form = AddArtWork(request.POST, request.FILES)
-          
         if form.is_valid():
             cd = form.cleaned_data
             artwork = Artwork(
@@ -19,7 +21,15 @@ def addartwork(request):
             object3d = cd['object3d'],
             )
             artwork.save() 
+            user.artworks.add(artwork)
             tags = cd['tags'].split(', ')
+
+            for tag in tags:
+                tmp_user = User.objects.get(tag=tag)
+                if tmp_user:
+                    tmp_user.artworks.add(artwork)
+                else:
+                    print("Error: User with this tag does not exist")
             try:
                 form.save()
                 return redirect('/artwork/')
