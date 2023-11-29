@@ -34,7 +34,9 @@ function sendComment(index) {
             },
             success: function(data) {
                 document.getElementById('commentArea').value = "";
-                
+                var replace = document.getElementById('commentSection');
+                replace.innerHTML = '';
+                replace.innerHTML = data;
             }
         });
     }
