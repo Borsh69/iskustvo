@@ -3,8 +3,53 @@ from .models import *
 from .forms import *
 
 # Create your views here.
+def addartwork(request):
+    if "id" in request.session:
+        return redirect('/account/')
+    if request.method == 'POST':
+        form = AddArtWork(request.POST, request.FILES)
+          
+        if form.is_valid():
+            cd = form.cleaned_data
+            artwork = Artwork(
+            face = cd['face'],
+            name = cd['name'],
+            description = cd['description'],
+            uncompressed_img = cd['uncompressed_img'],
+            object3d = cd['object3d'],
+            )
+            artwork.save() 
+            tags = cd['tags'].split(', ')
+            try:
+                form.save()
+                return redirect('/artwork/')
+            except :
+                form.add_error(None, "error add post")
+
+        else:
+            print("Error")
+    else:
+        form = AddArtWork()
+
+    return render(request, 'addartwork.html', {'form': form})
 def regist(request):
-    return render(request, 'regist.html')
+    if "id" in request.session:
+        return redirect('/account/')
+    if request.method == 'POST':
+        form = RegistForm(request.POST, request.FILES)
+        if form.is_valid():
+            cd = form.cleaned_data
+            try:
+                form.save()
+                return redirect('/login/')
+            except :
+                form.add_error(None, "error add post")
+
+        else:
+            print("Error")
+    else:
+        form = RegistForm()
+    return render(request, 'regist.html', {'form': form})
 def artwork(request, pk):
     artwork = Artwork.objects.get(id=pk)
     coun = artwork.comments.count()
@@ -24,7 +69,6 @@ def contact(request):
     return render(request, 'contact.html')
 
 def login(request):
-
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
