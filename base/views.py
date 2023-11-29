@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from .models import *
 from .forms import *
 
@@ -55,3 +55,19 @@ def account(request):
     else:
         return redirect("/login/")
     
+
+def post_comment(request):
+    if "id" in request.session:
+        user_id = int(request.session['id'])
+        user = User.objects.get(id=user_id)
+        if request.method == "POST":
+            text = request.POST.get('text', None)
+            index = int(request.POST.get('index', None))
+            tmp = Comment(author=user, text=text,)
+            tmp.save()
+            artwork = Artwork.objects.get(id=index)
+            artwork.comments.add(tmp)
+            artwork.save()
+            return HttpResponse("<h1>NICE!</h1>")
+    else:
+        return redirect("/login/")
