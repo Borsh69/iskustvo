@@ -15,8 +15,6 @@ def home(request):
 
 def art_works(request):
     art_works = Artwork.objects.all()
-    art_work = art_works.get(id=1)
-    print(art_work.users.all())
     context = {'artworks': art_works}
     return render(request, 'blog.html', context=context)
 
@@ -51,7 +49,9 @@ def account(request):
         user = User.objects.get(id=user_id)
         coun = user.artworks.count()
         form = {"user":user, 'coun': coun}
-        return render(request, 'account.html', context=form)
+        response = render(request, 'account.html', context=form)
+        response.set_cookie('In_Account', 'True ')
+        return response
     else:
         return redirect("/login/")
     
@@ -67,7 +67,7 @@ def post_comment(request):
             tmp.save()
             artwork = Artwork.objects.get(id=index)
             artwork.comments.add(tmp)
-            artwork.save()
+            print("success!")
             return HttpResponse("<h1>NICE!</h1>")
     else:
         return redirect("/login/")
