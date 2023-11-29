@@ -82,7 +82,7 @@ def login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
-            
+            print(form.cleaned_data)
             cd = form.cleaned_data
             try:
                 usr_account = User.objects.get(login=cd["login"])   

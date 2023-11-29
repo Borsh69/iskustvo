@@ -2781,3 +2781,7 @@ section {
   justify-content: center;
   display: flex;
 }
+.model_viewer {
+  width: 100%;
+  height: 600px;
+}

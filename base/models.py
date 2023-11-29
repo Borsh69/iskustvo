@@ -6,6 +6,15 @@ from io import BytesIO
 from django.core.files.uploadedfile import InMemoryUploadedFile
 
 
+def validate_file_extension(value):
+    import os
+    from django.core.exceptions import ValidationError
+    ext = os.path.splitext(value.name)[1]  # [0] returns path+filename
+    valid_extensions = [".gltf", ".glb"]
+    if not ext.lower() in valid_extensions:
+        raise ValidationError('Unsupported file extension.')
+
+
 class Comment(models.Model):
     author = models.ForeignKey("User", on_delete=models.CASCADE)
     text = models.CharField(max_length=200)
@@ -16,7 +25,7 @@ class Artwork(models.Model):
     name = models.CharField(max_length=40,)
     description = models.TextField(max_length=500,)
     uncompressed_img = models.ImageField(upload_to="images/", verbose_name="Оригинальное изображение", blank=True,)
-    object3d = models.FileField(upload_to="files/", verbose_name="3D файл", blank=True,)
+    object3d = models.FileField(upload_to="files/", verbose_name="3D файл", blank=True, validators=[validate_file_extension])
     comments = models.ManyToManyField(Comment, blank=True)
     date = models.DateField(auto_now_add=True, blank=True)
     def __str__(self):
