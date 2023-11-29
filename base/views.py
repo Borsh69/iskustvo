@@ -3,6 +3,8 @@ from .models import *
 from .forms import *
 
 # Create your views here.
+def regist(request):
+    return render(request, 'regist.html')
 def artwork(request, pk):
     artwork = Artwork.objects.get(id=pk)
     coun = artwork.comments.count()

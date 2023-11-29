@@ -10,5 +10,6 @@ urlpatterns = [
     path('account/', views.account, name="account"),
     path('artwork/<str:pk>/', views.artwork, name="artwork"),
     path('post_comment/', views.post_comment, name="post_comment"),
+    path('regist/', views.regist, name="regist"),
 
 ]

@@ -9,7 +9,7 @@
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-6 text-center">
-            <form action="{% url 'login'%}" class="registration-cssave__form" method = "post" novalidate>
+            <form action="{% url 'regist'%}" class="registration-cssave__form" method = "post" novalidate>
                 {% csrf_token %}
                 <div class = "form-group"><p>
                     <label class = "form-label" for="{{ form.login.id_for_label}}">Логин:  </label>

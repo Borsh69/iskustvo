@@ -31,13 +31,14 @@
               <div class="d-flex align-items-center justify-content-between mb-3">
                   <h5 class="mb-0">Ваши работы</h5><a href="#" class="btn btn-link text-muted"></a>
               </div>
-              <div class="row">
-                {% for i in user.artworks.all %}
+              {% for i in user.artworks.all %}
+              <div class="row" onclick="location.href='{% url 'artwork' i.id %}';">
+                
                   <div class="col-lg-6 mb-2 pr-lg-1"><img src="{{ i.face.url }}" alt="" class="img-fluid rounded shadow-sm"></div>
                   <a href="{% url 'artwork' i.id %}" style="text-align: left;" class="btn btn-link text-muted">{{i.name}}</a>
-                {% endfor %}
+                
               </div>
-              
+              {% endfor %}
           </div>
       </div><!-- End profile widget -->
 
