@@ -1,0 +1,64 @@
+{% extends 'main.html' %}
+
+{% load static %}<!-- End Header -->
+{% block content %}
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs d-flex align-items-center" style="background: linear-gradient(120deg, rgba(0,78,168,1) 0%, rgba(255,83,56,1) 100%);">
+      <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
+
+        
+        
+      </div>
+    </div><!-- End Breadcrumbs -->
+
+    <!-- ======= Blog Section ======= -->
+    <section id="blog" class="blog">
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+            <div class="row gy-4 posts-list">
+              {% for i in exe %}
+              <div class="col-xl-4 col-md-6">
+                
+                <div class="post-item position-relative h-100" style="cursor: pointer;">
+                  <div class="post-img position-relative overflow-hidden">
+                    <img src="{{i.face.url}}" class="img-fluid" alt="">
+                  </div>
+    
+                  <div class="post-content d-flex flex-column">
+    
+                    <h3 class="post-title">{{i.title}}</h3>
+    
+                    <div class="meta d-flex align-items-center">  
+                      <div class="d-flex align-items-center">
+                         <span class="ps-2">Начало: {{i.date_start}}</span>
+                         <span class="ps-2">Конец: {{i.date_end}}</span>
+                      </div>
+                    </div>
+                    <p>
+                      {{i.description}}
+                    </p>
+                    <div id="like_button{{i.id}}" {% if competition in i.favorite.all %} class="main-block__button__liked" {% else %} class="main-block__button" {% endif %} data-catid="{{competition.id}}" onclick="event.cancelBubble=true;MyClick({{i.id}});"></div>
+                    <hr>
+    
+    
+                  </div>
+    
+                </div>
+              </div><!-- End post list item -->
+              {% endfor %}
+    
+            </div><!-- End blog posts list -->
+    
+    
+    
+          </div>
+    </section><!-- End Blog Section -->
+
+  </main><!-- End #main -->
+
+
+
+  {% endblock content %}

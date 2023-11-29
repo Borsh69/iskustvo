@@ -1,8 +1,20 @@
 from django.shortcuts import render, redirect, HttpResponse
 from .models import *
 from .forms import *
-
+from json import dumps
 # Create your views here.
+def exhibition(request):
+    exe = Exhibition.objects.all()
+    data=[]
+    for i in exe:
+        temp = {'title':i.title, 'start':str(i.date_start)[0:10], 'end':str(i.date_end)[0:10]}
+        data.append(temp)
+    dataJSON = dumps(data)
+
+    print(dataJSON)
+    return render(request, 'exhibition.html', {'data':dataJSON, 'exe':exe})
+
+
 def addartwork(request):
     if "id" in request.session:
         user_id = int(request.session['id'])
@@ -104,7 +116,15 @@ def account(request):
         user_id = int(request.session['id'])
         user = User.objects.get(id=user_id)
         coun = user.artworks.count()
-        form = {"user":user, 'coun': coun}
+        exe = user.favorite.all()
+        data=[]
+        for i in exe:
+            temp = {'title':i.title, 'start':str(i.date_start)[0:10], 'end':str(i.date_end)[0:10]}
+        data.append(temp)
+        dataJSON = dumps(data)
+
+
+        form = {"user":user, 'coun': coun, 'data': dataJSON}
         response = render(request, 'account.html', context=form)
         response.set_cookie('In_Account', 'True')
         return response
@@ -130,3 +150,25 @@ def post_comment(request):
             return render(request, "artwork_comments.html", context=context)
     else:
         return redirect("/login/")
+    
+def liked(request):
+    if 'id' in request.session:
+        id_per = request.session['id']
+        account = User.objects.get(id=id_per)
+    else: return redirect("/login/")
+    if request.method == 'POST':
+        liked_id = request.POST.get('liked_id', None)
+        account.favorite.add(Exhibition.objects.get(id=liked_id))
+        account.save()
+        return HttpResponse("<h1>Nice!</h1>")
+
+def unliked(request):
+    if 'id' in request.session:
+        id_per = request.session['id']
+        account = User.objects.get(id=id_per)
+    else: return redirect("/login/")
+    if request.method == 'POST':
+        liked_id = request.POST.get('liked_id', None)
+        account.favorite.remove(Exhibition.objects.get(id=liked_id))
+        account.save()
+        return HttpResponse("<h1>Nice!</h1>")

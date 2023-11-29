@@ -40,7 +40,6 @@ class User(models.Model):
     login = models.CharField(max_length=20, unique=True,)
     password = models.CharField(max_length=20)
     artworks = models.ManyToManyField(Artwork, blank=True, related_name="users")
-
     def __str__(self):
         return self.name
     
@@ -49,10 +48,12 @@ class Exhibition(models.Model):
     face = models.ImageField(upload_to="images/", verbose_name="Лицевое изображение",)
     title = models.CharField(max_length=40,)
     description = models.TextField(max_length=500,)
-    visitors = models.ManyToManyField(User, blank=True, related_name="exhibitions")
+    visitors = models.ManyToManyField(User, blank=True, related_name="favorite")
     date_start = models.DateField()
     date_end = models.DateField()
 
+    def __str__(self):
+        return self.title
 
 @receiver(pre_save, sender=Artwork)
 def resize(sender,instance, **kwargs):

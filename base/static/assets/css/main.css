@@ -108,6 +108,47 @@ section {
     max-width: 60%;
   }
 }
+.calendar__title {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: calc(var(--index) * .6);
+  font-weight: 600;
+}
+.main-block__button__liked {
+  z-index: 8;
+  flex: 0 0 17%;
+  display: block;
+  position: absolute;
+  text-align: left;
+  width: 50px;	
+  height: 50px;
+  background-image: url(../img/heart-filled.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  right: 0;
+bottom: 0;
+border-radius: 10px;
+  transition: .2s;
+}
+.main-block__button__liked:hover {
+  background-image: url(../img/heart-outlined.png);
+}
+.calendar__arrow {
+  user-select: none;
+  height: calc(var(--index) * .6);
+  filter: invert(1);
+  transform: rotate(-180deg);
+  margin-left: 5px;
+  transition: transform .2s ease;
+}
+.calendar__arrow.rotate {
+  transform: rotate(0);
+}
+.calendar__main {
+  margin-top: 10px;
+
+}
 /*--------------------------------------------------------------
 # Тимур лох
 --------------------------------------------------------------*/
