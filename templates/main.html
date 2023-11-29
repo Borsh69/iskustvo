@@ -45,8 +45,9 @@
                 <ul>
                   <li><a href="{% url 'art_works' %}">Работы</a></li>
                   <li><a href="{% url 'maps' %}">Карты</a></li>
-                  <li><a href="{% url 'account' %}">Личный кабинет</a></li>
                   <li><a href="{% url 'addartwork' %}">Добавление работы</a></li>
+                  <li><a href="{% url 'exhibition' %}">Выставки</a></li>
+                  <li><a href="{% url 'account' %}">Личный кабинет</a></li>
                 </ul>
               </nav><!-- .navbar -->
         
@@ -68,6 +69,7 @@
 	  <script src="{% static 'assets/js/main.js' %}"></script>
     <script src="{% static 'assets/js/addons.js' %}"></script>
     <script src="{% static 'assets/js/jquery.js' %}"></script>
+    <script src="{% static 'assets/js/index.global.min.js' %}"></script>
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
     {% endblock script %}
 </body>

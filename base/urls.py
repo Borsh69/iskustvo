@@ -12,5 +12,8 @@ urlpatterns = [
     path('post_comment/', views.post_comment, name="post_comment"),
     path('regist/', views.regist, name="regist"),
     path('addartwork/', views.addartwork, name="addartwork"),
+    path('exhibition/', views.exhibition, name="exhibition"),
+    path("liked/", views.liked, name="liked"),
+    path("unliked/", views.unliked, name="unliked"),
 
 ]
