@@ -38,6 +38,10 @@
                 {% if artwork.uncompressed_img %}
                 <a download href="{{artwork.uncompressed_img.url}}">Оригинальное изображение</a>
                 {% endif %}
+                {% if artwork.object3d %}
+                <h3>3D Просмотр:</h3>
+                <model-viewer class="model_viewer" alt="3D model view" src="{{artwork.object3d.url}}" ar shadow-intensity="1" camera-controls touch-action="pan-y"></model-viewer>
+                {% endif %}
               </div><!-- End post content -->
 
 
