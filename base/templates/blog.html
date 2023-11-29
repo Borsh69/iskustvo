@@ -32,11 +32,12 @@
                 <h3 class="post-title">{{artwork.name}}</h3>
 
                 {% if artwork.users.all %}
-                <div class="meta d-flex align-items-center">
+                <div class="meta d-flex align-items-center">  
                   {% for user in artwork.users.all %}
                   <div class="d-flex align-items-center">
-                    <i class="bi bi-person"></i> <span class="ps-2">{{user.name}}</span>
+                     <span class="ps-2">{{user.name}}{% if user != artwork.users.all.first %},{% endif %}</span>
                   </div>
+
                   {% endfor %}
                 </div>
                 {% endif %}
