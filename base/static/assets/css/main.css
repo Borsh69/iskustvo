@@ -2702,4 +2702,5 @@ section {
 
 .post-img {
   justify-content: center;
+  display: flex;
 }

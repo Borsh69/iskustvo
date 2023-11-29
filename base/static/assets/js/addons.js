@@ -1,3 +1,10 @@
+function getCookie(name) {
+    let matches = document.cookie.match(new RegExp(
+      "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+    ));
+    return matches ? decodeURIComponent(matches[1]) : undefined;
+    }
+
 function getCSRFToken() {
     const name = 'csrftoken';
     const cookies = document.cookie.split(';');
@@ -13,18 +20,26 @@ function getCSRFToken() {
 function sendComment(index) {
     var text = document.getElementById('commentArea').value;
     const csrftoken = getCSRFToken();
-    $.ajax({
-        type: "POST",
-        url: "/post_comment/",
-        data: {
-            'text': text,
-            'index': index,
-        },
-        beforeSend: function(xhr) {
-            xhr.setRequestHeader('X-CSRFToken', csrftoken);
-        },
-        success: function(data) {
-            
-        }
-    });
+    var myCookies = getCookie("In_Account")
+    if (myCookies == "True"){
+        $.ajax({
+            type: "POST",
+            url: "/post_comment/",
+            data: {
+                'text': text,
+                'index': index,
+            },
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader('X-CSRFToken', csrftoken);
+            },
+            success: function(data) {
+                document.getElementById('commentArea').value = "";
+                
+            }
+        });
+    }
+    else {
+        window.location.replace("/login/");
+    }
+    
 }
