@@ -47,9 +47,8 @@ def account(request):
     if "id" in request.session:
         user_id = int(request.session['id'])
         user = User.objects.get(id=user_id)
-        
-        
-        form = {"user":user}
+        coun = user.artworks.count()
+        form = {"user":user, 'coun': coun}
         response = render(request, 'account.html', context=form)
         response.set_cookie('In_Account', 'True ')
         return response

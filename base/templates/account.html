@@ -2,87 +2,54 @@
 
 {% load static %}<!-- End Header -->
 {% block content %}
-<main id="main">
+<body style="background: linear-gradient(120deg, rgba(0,78,168,1) 0%, rgba(255,83,56,1) 100%);">
+<div class="row">
+  <div class="col-lg-7 mx-auto text-white text-center pt-5">
+      <h1 class="display-4"> </h1>
+      <p class="lead mb-0"></p>
+
+  </div>
+</div><!-- End -->
 
 
-    
-    <div class="page-heading">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8 offset-lg-2 header-text">
-            <h2>Ваш личный кабинет</h2>
-            <p>Здесь вы можете посмотреть ваши альбомы, фотографии и видео.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  
-    <div class="user-info">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="avatar">
-              <img src="" alt="">
+<div class="row py-5 px-4">
+  <div style="width: 70%;" class="col-xl-4 col-md-6 col-sm-10 mx-auto">
 
-            </div>
-          </div>
-    </div>
-  
-    <section class="portfolio">
-      <div class="container">
-        <div class="row">
-          <div class="section-heading text-center">
-            <h6 style="font-size: 30pt; font-weight: bold;">Ваши альбомы</h6>
-  
-          </div>
-
-          <div class="card" style="width: 18rem; margin-left: 20px; margin-bottom: 20px;">
-              <img src="" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">{{i.name}}</h5>
-                <p class="card-text">{{i.description}}</p>
-                <a href="" class="btn btn-primary">Перейти в альбом</a>
+      <!-- Profile widget -->
+      <div class="bg-white shadow rounded overflow-hidden">
+          <div style="background-color: #1D1D1B;" class="px-4 pt-0 pb-4 bg-dark">
+              <div  class="media align-items-end profile-header">
+                  <div class="profile mr-3"><img style="margin-top: 40px;" src="{{user.avatar.url}}" alt="..." width="130" class="rounded mb-2 img-thumbnail"></div>
+                  <div class="media-body mb-5 text-white">
+                      <h4 class="mt-0 mb-0">{{user.name}}</h4>
+                      <p class="small mb-4"> Количество работ {{coun}}</p>
+                  </div>
               </div>
-            </div>
+          </div>
 
-          <div class="card" style="width: 18rem; margin-left: 20px; margin-bottom: 20px;">
-            <div class="card-body">
-              <h5 class="card-title">Добавить новый альбом?</h5>
-              <p class="card-text">Разместите больше фото котиков :3</p>
-              <a id="modal_trigger" href="#modal" class="btn btn-primary">Создать</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  
-      <div style="margin-bottom: 20px;" class="container">
-        <div class="row">
-            <div class="col-lg-12">
-              <h4>Избранные фото и видео</h4>
-            </div>
-          </div>
-        </div>  
-      </div>
-  <section class="portfolio"><div class="user-info">
-  
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-3">
-            <div class="thumb">
-              <img src="" alt="">
-              <div class="hover-effect">
-                <div class="content">
-                  <h4>Walk In the Beach</h4>
-                  <span>Ranked: <em>2nd</em></span>
-                  <span>Award Won: <em>None</em></span>
-                  <ul>
-                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                    <li><a href="#"><i class="fa fa-eye"></i></a></li>
-                  </ul>
-                </div>
+          <div class="py-4 px-4">
+              <div class="d-flex align-items-center justify-content-between mb-3">
+                  <h5 class="mb-0">Ваши работы</h5><a href="#" class="btn btn-link text-muted"></a>
               </div>
-            </div>
+              <div class="row">
+                {% for i in user.artworks.all %}
+                  <div class="col-lg-6 mb-2 pr-lg-1"><img src="{{ i.face.url }}" alt="" class="img-fluid rounded shadow-sm"></div>
+                  <a href="{% url 'artwork' i.id %}" style="text-align: left;" class="btn btn-link text-muted">{{i.name}}</a>
+                {% endfor %}
+              </div>
+              
           </div>
-  </main><!-- End #main -->
+      </div><!-- End profile widget -->
+
+  </div>
+</div>
+<div id="hero-carousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+
+  <div class="carousel-item active" style="background: linear-gradient(120deg, rgba(0,78,168,1) 0%, rgba(255,83,56,1) 100%);"></div>
+
+
+
+
+</div>
+</body>
 {% endblock content %}
