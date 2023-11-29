@@ -28,6 +28,7 @@ class Artwork(models.Model):
     object3d = models.FileField(upload_to="files/", verbose_name="3D файл", blank=True, validators=[validate_file_extension])
     comments = models.ManyToManyField(Comment, blank=True)
     date = models.DateField(auto_now_add=True, blank=True)
+    place = models.PositiveIntegerField(null = True, blank = True)
     def __str__(self):
         return self.name
     

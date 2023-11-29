@@ -42,6 +42,8 @@ def addartwork(request):
         form = AddArtWork()
 
     return render(request, 'addartwork.html', {'form': form})
+
+
 def regist(request):
     if "id" in request.session:
         return redirect('/account/')
@@ -60,6 +62,9 @@ def regist(request):
     else:
         form = RegistForm()
     return render(request, 'regist.html', {'form': form})
+
+
+
 def artwork(request, pk):
     artwork = Artwork.objects.get(id=pk)
     coun = artwork.comments.count()
@@ -75,8 +80,10 @@ def art_works(request):
     context = {'artworks': art_works}
     return render(request, 'blog.html', context=context)
 
-def contact(request):
-    return render(request, 'contact.html')
+def maps(request):
+    art_works = Artwork.objects.all()
+    context = {'artworks': art_works}
+    return render(request, 'maps.html', context=context)
 
 def login(request):
     if request.method == 'POST':

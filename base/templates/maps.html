@@ -1,0 +1,125 @@
+{% extends 'main.html' %}
+
+{% load static %}<!-- End Header -->
+{% block content %}
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs d-flex align-items-center" style="background: linear-gradient(120deg, rgba(0,78,168,1) 0%, rgba(255,83,56,1) 100%);">
+      <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
+
+
+      </div>
+    </div><!-- End Breadcrumbs -->
+
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+      <h3 class="container">Главный хаб</h3>
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <img class="main_map" src="{% static 'img/hub.webp' %}">
+      </div>
+      
+      <div class="container special_block">
+        <p style="margin: 1rem 0 0 0;">1. Неформат:</p>
+        <div class="special_list"> 
+          <ul>
+            {% for artwork in artworks %}
+            {% if artwork.place == 1 %}
+            <li>
+              <a href="{% url 'artwork' artwork.id %}">{{artwork.name}}</a>
+            </li>
+            {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+        <!--################################################################################-->
+        <p style="margin: 1rem 0 0 0;">2. Современное изобразительное искусство:</p>
+        <div class="special_list"> 
+          <ul>
+            {% for artwork in artworks %}
+            {% if artwork.place == 2 %}
+            <li>
+              <a href="{% url 'artwork' artwork.id %}">{{artwork.name}}</a>
+            </li>
+            {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+        <!--################################################################################-->
+        <p style="margin: 1rem 0 0 0;">3. Современные скульптуры:</p>
+        <div class="special_list"> 
+          <ul>
+            {% for artwork in artworks %}
+            {% if artwork.place == 3 %}
+            <li>
+              <a href="{% url 'artwork' artwork.id %}">{{artwork.name}}</a>
+            </li>
+            {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+        <!--################################################################################-->
+        <p style="margin: 1rem 0 0 0;">4. Классичекое изобразительное искусство:</p>
+        <div class="special_list"> 
+          <ul>
+            {% for artwork in artworks %}
+            {% if artwork.place == 4 %}
+            <li>
+              <a href="{% url 'artwork' artwork.id %}">{{artwork.name}}</a>
+            </li>
+            {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+        <!--################################################################################-->
+        <p style="margin: 1rem 0 0 0;">5. Классические скульптуры:</p>
+        <div class="special_list"> 
+          <ul>
+            {% for artwork in artworks %}
+            {% if artwork.place == 5 %}
+            <li>
+              <a href="{% url 'artwork' artwork.id %}">{{artwork.name}}</a>
+            </li>
+            {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+        
+      </div>
+      <h3 class="container">Учебный корпус</h3>
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <img class="main_map" src="{% static 'img/stud.webp' %}">
+      </div>
+      <div class="container special_block">
+        <p style="margin: 1rem 0 0 0;">6. Цифровое изобразительное искусство:</p>
+        <div class="special_list"> 
+          <ul>
+            {% for artwork in artworks %}
+            {% if artwork.place == 6 %}
+            <li>
+              <a href="{% url 'artwork' artwork.id %}">{{artwork.name}}</a>
+            </li>
+            {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+        <!--################################################################################-->
+        <p style="margin: 1rem 0 0 0;">7. Цифровые скульптуры:</p>
+        <div class="special_list"> 
+          <ul>
+            {% for artwork in artworks %}
+            {% if artwork.place == 7 %}
+            <li>
+              <a href="{% url 'artwork' artwork.id %}">{{artwork.name}}</a>
+            </li>
+            {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </section><!-- End Contact Section -->
+
+  </main><!-- End #main -->
+
+  {% endblock content %}
