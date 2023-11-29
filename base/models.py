@@ -45,7 +45,13 @@ class User(models.Model):
         return self.name
     
 
-
+class Exhibition(models.Model):
+    face = models.ImageField(upload_to="images/", verbose_name="Лицевое изображение",)
+    title = models.CharField(max_length=40,)
+    description = models.TextField(max_length=500,)
+    visitors = models.ManyToManyField(User, blank=True, related_name="exhibitions")
+    date_start = models.DateField()
+    date_end = models.DateField()
 
 
 @receiver(pre_save, sender=Artwork)
