@@ -1,0 +1,56 @@
+{% extends 'main.html' %}
+
+{% load static %}<!-- End Header -->
+{% block content %}
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="hero">
+
+    <div class="info d-flex align-items-center">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-6 text-center">
+            <form action="{% url 'addartwork'%}" enctype="multipart/form-data" class="registration-cssave__form" method = "post" novalidate>
+                {% csrf_token %}
+                <div class = "form-group"><p>
+                    <label class = "form-label" for="{{ form.face.id_for_label}}">Обложка:  </label>
+                    {{form.face}}</p>
+                <div class = "">{{form.face.errors}}</div>
+
+                <div class = ""><p><label class = "form-label" for="{{ form.name.id_for_label}}">Имя:  </label>{{form.name}}</p></div>
+                <div class = "">{{form.name.errors}}</div>
+
+                <div class = ""><p><label class = "form-label" for="{{ form.description.id_for_label}}">Описание:  </label>
+                    {{form.description}}  </p></div>    
+                <div class = "">{{form.description.errors}}</div>
+
+                <div class = ""><p><label class = "form-label" for="{{ form.uncompressed_img.id_for_label}}">Оригинальное фото:  </label>{{form.uncompressed_img}}</p></div>
+                <div class = "">{{form.uncompressed_img.errors}}</div>
+
+                <div class = ""><p><label class = "form-label" for="{{ form.object3d.id_for_label}}">3д модель:  </label>{{form.object3d}}</p></div>
+                <div class = "">{{form.object3d.errors}}</div>
+
+                <div class = ""><p><label class = "form-label" for="{{ form.tags.id_for_label}}">Со авторы:  </label>{{form.tags}}</p></div>
+                <div class = "">{{form.tags.errors}}</div>
+
+                <a class = "form-label-a" href="{% url 'regist' %}">Зарегестрироваться?</a>
+                <div class = "">
+                    <button class="login_button">Добавить</button>
+                </div>
+            </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="hero-carousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+
+      <div class="carousel-item active" style="background: linear-gradient(120deg, rgba(0,78,168,1) 0%, rgba(255,83,56,1) 100%);"></div>
+
+
+
+
+    </div>
+
+ 
+  {% endblock content %}
