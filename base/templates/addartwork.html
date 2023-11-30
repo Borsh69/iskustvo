@@ -32,6 +32,9 @@
                 <div class = ""><p><label class = "form-label" for="{{ form.tags.id_for_label}}">Со авторы:  </label>{{form.tags}}</p></div>
                 <div class = "">{{form.tags.errors}}</div>
 
+                <div class = ""><p><label class = "form-label" for="{{ form.place.id_for_label}}">Выставка №:  </label>{{form.place}}</p></div>
+                <div class = "">{{form.place.errors}}</div>
+
                 <a class = "form-label-a" href="{% url 'regist' %}">Зарегестрироваться?</a>
                 <div class = "">
                     <button class="login_button">Добавить</button>

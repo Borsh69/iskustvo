@@ -32,3 +32,4 @@ class AddArtWork(forms.Form):
     uncompressed_img = forms.FileField(widget=forms.FileInput(attrs={'class': 'form-regist'}), required=False)
     object3d = forms.FileField(widget=forms.FileInput(attrs={'class': 'form-regist'}), required=False)
     tags = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-regist', 'placeholder':'example1, example2, example3'}), required=False)
+    place = forms.IntegerField(widget=forms.TextInput(attrs={'class': 'form-regist', 'placeholder':'0-7'}), required=False)

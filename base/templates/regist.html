@@ -9,7 +9,7 @@
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-6 text-center">
-            <form action="{% url 'regist'%}" class="registration-cssave__form" method = "post" novalidate>
+            <form action="{% url 'regist'%}" enctype="multipart/form-data" class="registration-cssave__form" method = "post" novalidate>
                 {% csrf_token %}
                 <div class = "form-group"><p>
                     <label class = "form-label" for="{{ form.name.id_for_label}}">Имя:  </label>
@@ -24,7 +24,7 @@
 
                 <div class = ""><p><label class = "form-label" for="{{ form.login.id_for_label}}">Логин:  </label>{{form.login}}</p></div>
                 <div class = "">{{form.login.errors}}</div>
-                <div class = ""><p><label class = "form-label" for="{{ form.password.id_for_label}}">Логин:  </label>{{form.password}}</p></div>
+                <div class = ""><p><label class = "form-label" for="{{ form.password.id_for_label}}">Пароль:  </label>{{form.password}}</p></div>
                 <div class = "">{{form.password.errors}}</div>
                 <a class = "form-label-a register-link" href="{% url 'login' %}">Войти в существующий аккаунт?</a>
                 <div class = "">

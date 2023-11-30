@@ -35,17 +35,20 @@ def addartwork(request):
             description = cd['description'],
             uncompressed_img = cd['uncompressed_img'],
             object3d = cd['object3d'],
+            place = cd['place'],
             )
             artwork.save() 
             user.artworks.add(artwork)
             tags = cd['tags'].split(', ')
-
-            for tag in tags:
-                tmp_user = User.objects.get(tag=tag)
-                if tmp_user:
-                    tmp_user.artworks.add(artwork)
-                else:
-                    print("Error: User with this tag does not exist")
+            print(len(tags))
+            print(tags)
+            if(len(tags)-1):
+                for tag in tags:
+                    tmp_user = User.objects.get(tag=tag)
+                    if tmp_user:
+                        tmp_user.artworks.add(artwork)
+                    else:
+                        print("Error: User with this tag does not exist")
             try:
                 form.save()
                 return redirect('/artwork/')
